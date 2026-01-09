@@ -3,13 +3,13 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-    projectId: "chinese-prompts",
-    appId: "1:98159143118:web:de46261ebb12ef004a889f",
-    storageBucket: "chinese-prompts.firebasestorage.app",
-    apiKey: "AIzaSyCz1vdUsjb7nZYrFCWKe-DFjswQJvEB4nI",
-    authDomain: "chinese-prompts.firebaseapp.com",
-    messagingSenderId: "98159143118",
-    measurementId: "G-8YFNVNYBXT"
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 const app = initializeApp(firebaseConfig);
