@@ -1,4 +1,4 @@
-# 🍌 中文-PROMPTS v0.4.18
+# 🍌 My Prompts v0.4.19
 
 Nanobana Pro 提示詞大全 | 茶米老師教室參考
 
@@ -21,6 +21,10 @@ Nanobana Pro 提示詞大全 | 茶米老師教室參考
 -   **Local Storage**: Browser LocalStorage (僅用於儲存 API Key)
 
 ## 📌 版本紀錄 (Version History)
+
+### v0.4.19 (2026-01-09)
+-   **專案更名**: 將應用程式名稱從「中文-PROMPTS」更名為「My Prompts」。
+-   **程式碼雲端同步**: 完成所有程式碼的 GitHub 初始化與推送。
 
 ### v0.4.18 (2026-01-02)
 -   **預設分類變更**: 首頁載入時的預設分類已更改為「AI」，讓您更快找到相關內容。

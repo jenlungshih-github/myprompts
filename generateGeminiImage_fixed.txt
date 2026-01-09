@@ -1,0 +1,38 @@
+  const generateGeminiImage = async (prompt) => {
+    setIsGeneratingImage(true);
+    setGeneratedImage(null);
+    try {
+      // Use Pollinations.ai for high-quality, free image generation
+      const seed = Math.floor(Math.random() * 1000000);
+      const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=1024&height=1024&seed=${seed}&nologo=true`;
+      
+      // Download the image as a blob
+      const response = await fetch(imageUrl);
+      const blob = await response.blob();
+      
+      // Display the image immediately for preview
+      const previewUrl = URL.createObjectURL(blob);
+      setGeneratedImage(previewUrl);
+      
+      // Upload to Firebase Storage
+      const timestamp = Date.now();
+      const storageRef = ref(storage, `gemini-images/${timestamp}.jpg`);
+      await uploadBytes(storageRef, blob);
+      
+      // Get the download URL from Firebase
+      const firebaseUrl = await getDownloadURL(storageRef);
+      
+      // Auto-paste the Firebase URL to the Prompt Master form
+      setNewPromptImage(firebaseUrl);
+      
+      // Scroll to the creation form for easy review
+      setTimeout(() => {
+        document.querySelector('.create-prompt-section')?.scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+    } catch (error) {
+      console.error("Image generation failed:", error);
+      alert("圖片生成或上傳失敗：" + error.message);
+    } finally {
+      setIsGeneratingImage(false);
+    }
+  };
