@@ -659,7 +659,7 @@ function App() {
       <div className="status-indicators" style={{
         position: 'fixed',
         top: '10px',
-        right: '10px',
+        left: '10px',
         display: 'flex',
         gap: '10px',
         zIndex: 1000,
