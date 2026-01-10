@@ -35,8 +35,8 @@ function App() {
   const [newPromptCategory, setNewPromptCategory] = useState("自定義");
   const [customCategoryInput, setCustomCategoryInput] = useState("");
   const [aiMetadata, setAiMetadata] = useState(null); // { title, description, tags }
-  const [apiKey, setApiKey] = useState(localStorage.getItem('gemini_api_key') || '');
-  const [showSettings, setShowSettings] = useState(!localStorage.getItem('gemini_api_key'));
+  const [apiKey, setApiKey] = useState(localStorage.getItem('gemini_api_key') || import.meta.env.VITE_GEMINI_API_KEY || '');
+  const [showSettings, setShowSettings] = useState(!localStorage.getItem('gemini_api_key') && !import.meta.env.VITE_GEMINI_API_KEY);
   const [selectedModel, setSelectedModel] = useState("gemini-1.5-flash-latest");
   const [expandedPrompts, setExpandedPrompts] = useState({});
   const [interactionPrompt, setInteractionPrompt] = useState("");
@@ -75,11 +75,16 @@ function App() {
   }, [apiKey]);
 
   const fetchAvailableModels = async () => {
+    setApiStatus("fetching");
     try {
       const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
-      if (!response.ok) return;
+      if (!response.ok) {
+        setApiStatus("error");
+        return;
+      }
       const data = await response.json();
       if (data.models) {
+        setApiStatus("success");
         const flashModels = data.models.filter(model =>
           (model.name.includes('flash') || model.displayName?.toLowerCase().includes('flash')) &&
           model.supportedGenerationMethods?.includes('generateContent')
@@ -93,6 +98,7 @@ function App() {
       }
     } catch (e) {
       console.error('Failed to fetch models', e);
+      setApiStatus("error");
     }
   };
 
