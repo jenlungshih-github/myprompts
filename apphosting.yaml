@@ -21,3 +21,5 @@ env:
     value: "129507729972"
   - variable: VITE_FIREBASE_MEASUREMENT_ID
     value: G-5MHLCW5K68
+  - variable: GOOGLE_GENAI_API_KEY
+    secret: GOOGLE_GENAI_API_KEY
