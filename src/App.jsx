@@ -42,6 +42,8 @@ function App() {
   const [interactionPrompt, setInteractionPrompt] = useState("");
   const [generatedImage, setGeneratedImage] = useState(null);
   const [isGeneratingImage, setIsGeneratingImage] = useState(false);
+  const [apiStatus, setApiStatus] = useState("idle");
+  const [dbStatus, setDbStatus] = useState("connecting");
 
   const toggleExpand = (id) => {
     setExpandedPrompts(prev => ({
@@ -58,6 +60,10 @@ function App() {
         ...doc.data()
       }));
       setCustomPrompts(promptsData);
+      setDbStatus("connected");
+    }, (error) => {
+      console.error("Firebase connection error:", error);
+      setDbStatus("error");
     });
     return () => unsubscribe();
   }, []);
@@ -383,6 +389,7 @@ function App() {
     setNewPromptImage(null);
     setAiMetadata(null);
 
+    setApiStatus("fetching");
     try {
       const genAI = new GoogleGenerativeAI(apiKey);
       const model = genAI.getGenerativeModel({
@@ -421,8 +428,10 @@ function App() {
 
       // Start Image Generation (will auto-paste to form when complete)
       generateGeminiImage(data.prompt);
+      setApiStatus("success");
     } catch (error) {
       console.error("Gemini Interaction failed:", error);
+      setApiStatus("error");
       alert("生成失敗：" + error.message);
     } finally {
       setIsGenerating(false);
@@ -647,6 +656,35 @@ function App() {
 
   return (
     <div className="app-container">
+      <div className="status-indicators" style={{
+        position: 'fixed',
+        top: '10px',
+        right: '10px',
+        display: 'flex',
+        gap: '10px',
+        zIndex: 1000,
+        fontSize: '0.8rem',
+        fontWeight: 'bold'
+      }}>
+        <div style={{
+          padding: '4px 8px',
+          borderRadius: '4px',
+          backgroundColor: 'rgba(0,0,0,0.6)',
+          border: `1px solid ${dbStatus === 'connected' ? '#43e97b' : dbStatus === 'error' ? '#ff4444' : '#ff9f43'}`,
+          color: dbStatus === 'connected' ? '#43e97b' : dbStatus === 'error' ? '#ff4444' : '#ff9f43'
+        }}>
+          DB: {dbStatus.toUpperCase()}
+        </div>
+        <div style={{
+          padding: '4px 8px',
+          borderRadius: '4px',
+          backgroundColor: 'rgba(0,0,0,0.6)',
+          border: `1px solid ${apiStatus === 'success' ? '#43e97b' : apiStatus === 'error' ? '#ff4444' : apiStatus === 'fetching' ? '#ff9f43' : '#aaa'}`,
+          color: apiStatus === 'success' ? '#43e97b' : apiStatus === 'error' ? '#ff4444' : apiStatus === 'fetching' ? '#ff9f43' : '#aaa'
+        }}>
+          API: {apiStatus.toUpperCase()}
+        </div>
+      </div>
       <div className="version-tag">v{pkg.version}</div>
       <header className="hero">
         <div className="container">

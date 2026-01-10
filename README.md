@@ -1,4 +1,4 @@
-# 🍌 My Prompts v0.4.19
+# 🍌 My Prompts v0.5.0
 
 Nanobana Pro 提示詞大全 | 茶米老師教室參考
 
@@ -21,6 +21,10 @@ Nanobana Pro 提示詞大全 | 茶米老師教室參考
 -   **Local Storage**: Browser LocalStorage (僅用於儲存 API Key)
 
 ## 📌 版本紀錄 (Version History)
+
+### v0.5.0 (2026-01-10)
+-   **狀態指示器**: 新增了 Gemini API 與 Firebase 資料庫的即時狀態顯示，方便監控連線狀況。
+-   **介面優化**: 在右上角固定顯示連線狀態標籤 (DB & API)。
 
 ### v0.4.19 (2026-01-09)
 -   **專案更名**: 將應用程式名稱從「中文-PROMPTS」更名為「My Prompts」。
