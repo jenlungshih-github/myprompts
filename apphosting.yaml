@@ -9,5 +9,15 @@ runConfig:
 env:
   - variable: VITE_FIREBASE_API_KEY
     secret: FIREBASE_API_KEY
-  - variable: PROD_
-    secret: FIREBASE_API_KEY
+  - variable: VITE_FIREBASE_PROJECT_ID
+    value: myprompts-e1453
+  - variable: VITE_FIREBASE_APP_ID
+    value: 1:129507729972:web:2c7024a7f0986c5db7e061
+  - variable: VITE_FIREBASE_STORAGE_BUCKET
+    value: myprompts-e1453.appspot.com
+  - variable: VITE_FIREBASE_AUTH_DOMAIN
+    value: myprompts-e1453.firebaseapp.com
+  - variable: VITE_FIREBASE_MESSAGING_SENDER_ID
+    value: "129507729972"
+  - variable: VITE_FIREBASE_MEASUREMENT_ID
+    value: G-5MHLCW5K68
