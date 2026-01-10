@@ -9,3 +9,5 @@ runConfig:
 env:
   - variable: VITE_FIREBASE_API_KEY
     secret: FIREBASE_API_KEY
+  - variable: PROD_
+    secret: FIREBASE_API_KEY
