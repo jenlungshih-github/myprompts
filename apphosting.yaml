@@ -1,0 +1,26 @@
+kind: "AppHostingYaml"
+version: "v1alpha"
+runConfig:
+  # The run command to use to start the application.
+  # App Hosting expects the application to listen on port 8080.
+  runCommand: "npm run start"
+  cpu: 1
+  memoryMiB: 512
+  maxInstances: 10
+  minInstances: 0
+  concurrency: 80
+env:
+  - variable: VITE_FIREBASE_PROJECT_ID
+    value: "chinese-prompts"
+  - variable: VITE_FIREBASE_APP_ID
+    value: "1:98159143118:web:de46261ebb12ef004a889f"
+  - variable: VITE_FIREBASE_STORAGE_BUCKET
+    value: "chinese-prompts.firebasestorage.app"
+  - variable: VITE_FIREBASE_API_KEY
+    value: "AIzaSyCz1vdUsjb7nZYrFCWKe-DFjswQJvEB4nI"
+  - variable: VITE_FIREBASE_AUTH_DOMAIN
+    value: "chinese-prompts.firebaseapp.com"
+  - variable: VITE_FIREBASE_MESSAGING_SENDER_ID
+    value: "98159143118"
+  - variable: VITE_FIREBASE_MEASUREMENT_ID
+    value: "G-8YFNVNYBXT"
